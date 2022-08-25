@@ -30,6 +30,7 @@ function createListenerCollection() {
 
     subscribe(listener) {
       let isSubscribed = true
+      //
       if (next === current) next = current.slice()
       next.push(listener)
 
@@ -71,7 +72,7 @@ export default class Subscription {
       this.unsubscribe = this.parentSub
         ? this.parentSub.addNestedSub(this.onStateChange)
         : this.store.subscribe(this.onStateChange)
- 
+
       this.listeners = createListenerCollection()
     }
   }

@@ -42,9 +42,11 @@ export function pureFinalPropsSelectorFactory(
   function handleNewPropsAndNewState() {
     stateProps = mapStateToProps(state, ownProps)
 
+    // 组件自身的属性发生了变化，而且dispatch依赖它们，这时候需要把自身属性传递给它们
     if (mapDispatchToProps.dependsOnOwnProps)
       dispatchProps = mapDispatchToProps(dispatch, ownProps)
 
+    // 终极合并
     mergedProps = mergeProps(stateProps, dispatchProps, ownProps)
     return mergedProps
   }

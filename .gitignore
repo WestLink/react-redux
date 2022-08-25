@@ -4,6 +4,8 @@ npm-debug.log
 dist
 lib
 .nyc_output
+.idea
+.yarn
 coverage
 es
 test/**/lcov.info

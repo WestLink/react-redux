@@ -16,8 +16,10 @@ function makeSelectorStateful(sourceSelector, store) {
   const selector = {
     run: function runComponentSelector(props) {
       try {
+        // 获取最新的props
         const nextProps = sourceSelector(store.getState(), props)
-        if (nextProps !== selector.props || selector.error) {
+        if (nextProps !== selector.props || selector.error) { // store里面的state有变化
+          // 更新并render
           selector.shouldComponentUpdate = true
           selector.props = nextProps
           selector.error = null
@@ -193,7 +195,9 @@ export default function connectAdvanced(
       }
 
       initSelector() {
+        // 初始化属性合并选择器模板
         const sourceSelector = selectorFactory(this.store.dispatch, selectorFactoryOptions)
+        // 创建一个处理属性状态合并的执行器，自身持有最新状态和是否更新的开关标记
         this.selector = makeSelectorStateful(sourceSelector, this.store)
         this.selector.run(this.props)
       }
